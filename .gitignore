@@ -5,3 +5,8 @@
 .DS_Store
 *.Rproj
 rsconnect/
+.httr-oauth
+Manager*
+Owner*
+Developer*
+*oauth

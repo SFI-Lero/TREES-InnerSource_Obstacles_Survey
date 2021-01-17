@@ -19,6 +19,10 @@ if (!(require(shinyWidgets))){
     install.packages("shinyWidgets", quiet = T)
     require(shinyWidgets)
 }
+if (!(require(rdrop2))){
+    install.packages("rdrop2", quiet = T)
+    require(rdrop2)
+}
 if (!(require(showtext))){
     install.packages("showtext", quiet = T)
     require(showtext)
@@ -30,6 +34,7 @@ translator <- Translator$new(translation_csvs_path = "data")
 
 # Define UI 
 ui <- uiOutput('page_content')
+
 # Define server logic 
 server <- function(input, output, session) {
     # state variable initialization
@@ -45,6 +50,45 @@ server <- function(input, output, session) {
             translator$set_translation_language(selected)
         }
         translator
+    })
+    
+    #save to dropbox
+    observeEvent(input$done, {
+        if (state() == 1){
+            df = data.frame(q='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+            fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
+            write.table(df, file = fname,  row.names = F, sep = ',')
+            drop_upload(fname, path = 'Public/HS_data')
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("The File has been saved in Dropbox"),
+                type = "success"
+            )
+        } else if (state() == 2){
+            df = data.frame(q='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+            fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
+            write.table(df, file = fname,  row.names = F, sep = ',')
+            drop_upload(fname, path = 'Public/HS_data')
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("The File has been saved in Dropbox"),
+                type = "success"
+            )
+        } else if (state() == 3){
+            df = data.frame(q='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+            fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
+            write.table(df, file = fname, row.names = F, sep = ',')
+            drop_upload(fname, path = 'Public/HS_data')
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("The File has been saved in Dropbox"),
+                type = "success"
+            )}
+        state(4)
+        
     })
     
     # UI 
@@ -73,8 +117,10 @@ server <- function(input, output, session) {
                                         "Owner/Maintainer of one of the pilot projects/ potential pilot projects" = 2, 
                                         "Developer, not in any of the above roles" = 3), 
                          selected = 1))
-       } else {
+       } else if (state() == 1 | state() == 2 | state() == 3){
            column(12, h4("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' "))
+       } else {
+           column(12, h3("Thank You! Your response has been recorded"))
        },
        br(),
        if (state() == 0){
@@ -264,18 +310,18 @@ server <- function(input, output, session) {
                label = h4(i18n()$t("CONCERN:  I feel that I’ll be judged by others if I make any mistakes"))
            ))
        },
-       if (state() != 0){
+       if (state() == 1 | state() == 2 | state() == 3){
            column(8, offset = 1, textAreaInput("otherConcern", label = h4(i18n()$t("If you feel that you have concern(s) that is (are) not listed here, please feel free to write that down with the score you think it should have")), value = "")  %>%
                       shiny::tagAppendAttributes(style = 'width: 100%;')
                   )
        },
-       if (state() != 0){
+       if (state() == 1 | state() == 2 | state() == 3){
            column(8, offset = 1, textAreaInput("positive", label = h4(i18n()$t("In addition, if you could think of ONE reason that would make you give InnerSource a try, what would that be? ")), value = "")  %>%
                       shiny::tagAppendAttributes(style = 'width: 100%;')
            )
        },
        br(),
-       if (state() != 0){
+       if (state() == 1 | state() == 2 | state() == 3){
            column(2, offset=1, actionBttn("done",label = i18n()$t("Submit"), 
                                           style = "pill", color = "success"))
        },
