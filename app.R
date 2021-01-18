@@ -23,11 +23,32 @@ if (!(require(rdrop2))){
     install.packages("rdrop2", quiet = T)
     require(rdrop2)
 }
+if (!(require(RSQLite))){
+    install.packages("RSQLite", quiet = T)
+    require(RSQLite)
+}
 if (!(require(showtext))){
     install.packages("showtext", quiet = T)
     require(showtext)
 }
 showtext_auto()
+
+##################################
+####    IMPORTANT ################
+# Have to be configured to use SQLite - Uncomment after done
+# sqlitePath <- "/path/to/sqlite/database"
+# check https://shiny.rstudio.com/articles/persistent-data-storage.html#SQLite for instructions
+##################################
+####    IMPORTANT  ###############
+# To use Dropbox, you'll need the .httr-oauth file 
+# To create this file, use the following command
+# library(rdrop2)
+# drop_auth()
+# This will launch your browser and request access to your Dropbox account. You will be prompted to log in if you aren't already logged in.
+# Once completed, close your browser window and return to R to complete authentication. 
+# The credentials are automatically cached (you can prevent this) for future use.
+##################################
+
 
 translator <- Translator$new(translation_csvs_path = "data")
 
@@ -39,9 +60,15 @@ ui <- uiOutput('page_content')
 server <- function(input, output, session) {
     # state variable initialization
     state = reactiveVal(0)  
-    # state update
+    # state update - have to add cn translation
     observeEvent(input$go, {
-        state(input$choice)
+        if (input$choice == "Part of management"){
+            state(1)
+        } else if (input$choice == "Owner/Maintainer of one of the pilot projects/ potential pilot projects"){
+            state(2)
+        } else if (input$choice == "Developer, not in any of the above roles"){
+            state(3)
+        }
     })
     
     i18n <- reactive({
@@ -54,31 +81,17 @@ server <- function(input, output, session) {
     
     #save to dropbox
     observeEvent(input$done, {
-        if (state() == 1){
-            df = data.frame(q='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
-            fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
-            write.table(df, file = fname,  row.names = F, sep = ',')
-            drop_upload(fname, path = 'Public/HS_data')
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("Thank you!"),
-                text = i18n()$t("The File has been saved in Dropbox"),
-                type = "success"
-            )
-        } else if (state() == 2){
-            df = data.frame(q='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
-            fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
-            write.table(df, file = fname,  row.names = F, sep = ',')
-            drop_upload(fname, path = 'Public/HS_data')
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("Thank you!"),
-                text = i18n()$t("The File has been saved in Dropbox"),
-                type = "success"
-            )
-        } else if (state() == 3){
-            df = data.frame(q='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
-            fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
+        tryCatch({
+            if (state() == 1){
+                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
+            } else if (state() == 2){
+                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
+            } else if (state() == 3){
+                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
+            }
             write.table(df, file = fname, row.names = F, sep = ',')
             drop_upload(fname, path = 'Public/HS_data')
             sendSweetAlert(
@@ -86,11 +99,82 @@ server <- function(input, output, session) {
                 title = i18n()$t("Thank you!"),
                 text = i18n()$t("The File has been saved in Dropbox"),
                 type = "success"
-            )}
-        state(4)
+            )
+        #state(4)
+        }, error=function(cond) {
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("ERROR!"),
+                text = i18n()$t("Dropbox Authentication is not properly set up"),
+                type = "error"
+            )
+        })
         
     })
     
+    # Download data
+    output$saveData = downloadHandler(
+        filename = function() {
+            sprintf('data_%s.csv',as.integer(Sys.time()))
+        },
+        content = function(file) {
+            if (state() == 1){
+                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                write.table(df, file = file,  row.names = F, sep = ',')
+            } else if (state() == 2){
+                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                write.table(df, file = file,  row.names = F, sep = ',')
+                
+            } else if (state() == 3){
+                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                write.table(df, file = file,  row.names = F, sep = ',')
+            }
+        }
+    )
+    
+    # save to SQLite database
+    observeEvent(input$sql, {
+        tryCatch({
+            if (state() == 1){
+                 table <- "responses_Manager" #--- NEED TO BE CREATED FIRST
+                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+            } else if (state() == 2){
+                table <- "responses_Owner" #--- NEED TO BE CREATED FIRST
+                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+            } else if (state() == 3){
+                table <- "responses_Developer" #--- NEED TO BE CREATED FIRST
+                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                }
+            #state(4)
+            # Connect to the database
+            db <- dbConnect(SQLite(), sqlitePath)
+            # Construct the update query by looping over the data fields
+            query <- sprintf(
+                "INSERT INTO %s (%s) VALUES ('%s')",
+                table, 
+                paste(names(df), collapse = ", "),
+                paste(df, collapse = "', '")
+            )
+            # Submit the update query and disconnect
+            dbGetQuery(db, query)
+            dbDisconnect(db)
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("The File has been saved in SQLIite DB"),
+                type = "success"
+            )
+        }, 
+        error=function(cond) {
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("ERROR!"),
+                text = i18n()$t("SQLite is not properly set up"),
+                type = "error"
+            )
+        })
+        
+    })
     # UI 
     output$page_content <- renderUI({
         fluidPage(
@@ -101,9 +185,9 @@ server <- function(input, output, session) {
                         selected = input$selected_language),
         ),
         # Application title
-        title = i18n()$t("Huawei InnerSource 2.0 Survey"),
+        title = i18n()$t(" InnerSource Obstacles Survey"),
         useSweetAlert(),
-        h1(i18n()$t("Huawei InnerSource 2.0 Survey")),
+        h1(i18n()$t(" InnerSource Obstacles Survey")),
         br(),br(),
         # changing content
         fluidRow(
@@ -112,10 +196,10 @@ server <- function(input, output, session) {
         # questions - Initial text
         if (state() == 0){
             column(12, radioButtons("choice", width = '100%',
-                         label = h4("* Initially, we are starting a number of pilot projects to fine-tune the InnerSource process to meet the needs of Huawei. To inform you better about how you can be a part of this exciting and important initiative, we first ask you to identify your role:"),
-                         choices = list("Part of management" = 1, 
-                                        "Owner/Maintainer of one of the pilot projects/ potential pilot projects" = 2, 
-                                        "Developer, not in any of the above roles" = 3), 
+                         label = h4(i18n()$t("* Initially, we are starting a number of pilot projects to fine-tune the InnerSource process. To inform you better about how you can be a part of this exciting and important initiative, we first ask you to identify your role:")),
+                         choices = list(i18n()$t("Part of management"), 
+                                        i18n()$t("Owner/Maintainer of one of the pilot projects/ potential pilot projects"), 
+                                        i18n()$t("Developer, not in any of the above roles")), 
                          selected = 1))
        } else if (state() == 1 | state() == 2 | state() == 3){
            column(12, h4("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' "))
@@ -322,9 +406,21 @@ server <- function(input, output, session) {
        },
        br(),
        if (state() == 1 | state() == 2 | state() == 3){
-           column(2, offset=1, actionBttn("done",label = i18n()$t("Submit"), 
-                                          style = "pill", color = "success"))
+           column(3, offset=1, actionBttn("done",label = i18n()$t("Save to Dropbox"), 
+                                          style = "pill", color = "success", 
+                                          icon = icon('save')))
        },
+       if (state() == 1 | state() == 2 | state() == 3){
+           column(3, offset = 1, downloadBttn("saveData",
+                                              label = i18n()$t("Download Data"), 
+                                              style = "jelly", color = "success"))
+       },
+       if (state() == 1 | state() == 2 | state() == 3){
+           column(3, offset=1, actionBttn("sql",label = i18n()$t("Save to SQLite DB"), 
+                                          style = "pill", color = "success", 
+                                          icon = icon('save')))
+       },
+       br(),
        
        
         )
@@ -334,9 +430,8 @@ server <- function(input, output, session) {
     output$content <- renderUI({
         if (state() == 0){
             HTML("<h4> 
-                 You might be aware of the InnerSource 2.0 initiative launched by Huawei.
-                 <br></br>
-                 It is of significant importance to top management in Huawei who seek 
+                 The InnerSource initiative is of significant importance to 
+                 the top management who seek 
                  to foster a collaborative environment to ensure the long-term
                  sustainability of software projects. 
                  <br></br>
