@@ -1,2 +1,44 @@
 en,中文
 Change language, 选择语言
+ERROR, 错误
+Dropbox Authentication is not properly set up, Dropbox的认证信息设置不正确
+Thank you,谢谢
+Submit,提交
+The File has been saved, 文件已经被保存
+SQLite is not properly set up, SQLite设置不正确
+InnerSource Obstacles Survey, 内源障碍调查
+"* Initially, we are starting a number of pilot projects to fine-tune the InnerSource process. To inform you better about how you can be a part of this exciting and important initiative, we first ask you to identify your role:", 我们将启动许多试点项目来对我们的内源流程进行磨合。 为了让您更好地了解自己如何参与这项激动人心的重要计划，我们首先请您确定您的角色：
+Part of management, 管理成员
+Owner/Maintainer of one of the pilot projects/ potential pilot projects, 试点或者潜在的试点项目的责任人或者维护人员
+"Developer, not in any of the above roles", 开发者，不属于上面的角色
+"We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' ", 我们想进一步了解您可能遇到的任何问题，以便我们解决并统计这些问题。 下面列出了一些常见的问题。 对于以下问题（以CONCERN：开头），请从您个人的角度以0到10的等级来评估该特定选项对采用内源的担忧程度，其中0：“一点都不担忧”，10： “十分担忧”
+Thank You! Your response has been recorded, 谢谢！您所提交的信息已保存
+CONCERN: I do not know what InnerSource is, CONCERN: 我不知道内源是什么
+CONCERN: I am not sure about the “benefits” of InnerSource, CONCERN: 我不确定内源能带来什么样的好处
+CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
+CONCERN: Contributions from other teams won’t be of sufficient quality, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
+CONCERN: Not knowing the person(s) responsible for a bug might slow responses to customers, CONCERN: 不认识负责处理Bug的人员可能会减慢对客户的响应
+CONCERN: Potential change in the management structure would disrupt the established workflow, CONCERN: 潜在管理结构的变化将破坏已建立的工作流程
+CONCERN: There might not be a budget allocated for InnerSource, CONCERN: 可能没有为InnerSource分配预算
+CONCERN: Contributions by others would not be of sufficient quality, CONCERN: 他人的贡献质量不高
+"CONCERN: People would create issues, but won’t submit any patches, and I’ll have to maintain it", CONCERN: 大家会提交问题，但不会提交任何补丁，而我必须维护它
+CONCERN: I’m unsure about the responsibilities, CONCERN: 我不确定内源的责任
+CONCERN: I won’t have enough time for mentoring other contributors, CONCERN: 我没有足够的时间来指导其他贡献者
+"CONCERN: If I publish code as InnerSource, others will take the code and the credit", CONCERN: 如果我以内源方式发布代码，则其他人将会窃取这些代码并且占有我的工作
+CONCERN: I would not be happy to publish my code as InnerSource for others to review, CONCERN: 我不愿意将代码以内源方式发布供其他人查看
+CONCERN: I do not know how to contribute to InnerSource, CONCERN: 我不知道如何向内源做贡献
+CONCERN: I am not sure what is suitable for InnerSource, CONCERN: 我不确定什么(项目)适合内源（方式开发）
+CONCERN: My immediate line manager would not be supportive of my contributions to InnerSource, CONCERN: 我的直属经理不会支持我对内源项目的贡献
+"CONCERN: There is too much to learn – new tools, new coding standards, etc.", CONCERN: 有太多东西要学习–新工具，新编码标准等
+CONCERN: Not knowing who consumes a shared system or code can make it difficult to add features without risking breaking a consumer, CONCERN: 不知道谁在使用共享系统或代码，这可能很难保证添加功能时不会影响用户的使用
+CONCERN: The incentives for all this hard work are not appropriate, CONCERN: 对这些辛勤工作使用了不恰当的激励
+CONCERN: No appropriate incentive for me to contribute to InnerSource, CONCERN: 没有适当的动机激励我为内源项目贡献力量
+CONCERN: I do not have time to contribute to InnerSource, CONCERN: 我没有时间为内源项目贡献力量
+CONCERN: The projects are not interesting to me, CONCERN: 这些项目对我来说并不有趣
+CONCERN: I feel that I’ll be judged by others if I make any mistakes, CONCERN: 我觉得如果我有任何错误我会被别人评价
+"If you feel that you have concern(s) that is (are) not listed here, please feel free to write that down with the score you think it should have", 如果您认为自己的担忧的问题不在此处列出，请写下您认为的问题并附上应拥有的分数
+"In addition, if you could think of ONE reason that would make you give InnerSource a try, what would that be?", 另外，如果您想到一个可以让您尝试内源的原因，那会是什么？
+Save to Dropbox, 保存至Dropbox
+Save to Local Storage, 保存到本地存储
+Download Data, 下载数据
+Save to SQLite DB, 存储到SQLite DB
