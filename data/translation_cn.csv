@@ -36,9 +36,29 @@ CONCERN: No appropriate incentive for me to contribute to InnerSource, CONCERN: 
 CONCERN: I do not have time to contribute to InnerSource, CONCERN: 我没有时间为内源项目贡献力量
 CONCERN: The projects are not interesting to me, CONCERN: 这些项目对我来说并不有趣
 CONCERN: I feel that I’ll be judged by others if I make any mistakes, CONCERN: 我觉得如果我有任何错误我会被别人评价
-"If you feel that you have concern(s) that is (are) not listed here, please feel free to write that down with the score you think it should have", 如果您认为自己的担忧的问题不在此处列出，请写下您认为的问题并附上应拥有的分数
+"If you feel that you have concern(s) that is (are) not listed here, please feel free to write that down with the score you think it should have", 如果您认为自己的担忧的问题不在此处列出，请写下您认为的问题并附上相应的分数
 "In addition, if you could think of ONE reason that would make you give InnerSource a try, what would that be?", 另外，如果您想到一个可以让您尝试内源的原因，那会是什么？
 Save to Dropbox, 保存至Dropbox
 Save to Local Storage, 保存到本地存储
 Download Data, 下载数据
 Save to SQLite DB, 存储到SQLite DB
+"The InnerSource initiative is of significant importance to the top management who seek to foster a collaborative environment to ensure the long-term sustainability of software projects.", 内源计划对于寻求营造协作环境以确保软件项目的长期可持续性的高层管理人员而言至关重要。
+"InnerSource seeks to apply the recipes of success from the Open-Source paradigm within a company and is heavily practiced by top companies around the world, e.g., Microsoft, Baidu, Tencent, SAP, Broadcom, and many more.", 内源试图在公司内部应用开源范例的成功秘诀，并且被世界各地的顶尖公司（例如Microsoft，百度，腾讯，SAP，Broadcom等）广泛采用。
+"In a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/adoption.html#effect-of-innersource-adoption-on-self'>recent survey</a>, 81% of the participants reported an increase in job satisfaction and 57% reported an increase in productivity in their own daily work after adopting the InnerSource style of working.", 在<a href='https://tapjdey.github.io/InnerSource_Survey_2020/adoption.html#effect-of-innersource-adoption-on-self'>最近的调查</a>中，81％的参与者报告了 采用内源的工作方式后，工作满意度提高了，有57％的人表示自己的日常工作效率得到提高。
+"As a member of the management, your support for the InnerSource initiative would be hugely appreciated. 85% of the participants in a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/success.html#attitude-of-the-management-towards-innersource-projects'>recent survey</a>,  confirmed that support from the management is critical for the success of the initiative.", 作为管理层的一员，将非常感谢您对InnerSource计划的支持。 <a href='https://tapjdey.github.io/InnerSource_Survey_2020/success.html#attitude-of-the-management-towards-innersource-projects'>近期调查</a>中，有85％的参与者确认管理层的支持对于该计划的成功至关重要。
+"We humbly request your understanding that although the initiative might face a few hiccups in the beginning, the long-term success will outweigh any short-term disruptions. Research suggests that management support in the initial tentative InnerSource phase is critical to long-term success.", 我们谨谦虚地请您的理解和支持，尽管该计划一开始可能会遇到一些麻烦，但长期成功收益将超过任何短期阵痛。 研究表明，初期阶段的管理层支持对于内源的长期成功至关重要。
+"It might seem that if your employees are spending time fixing other people’s code the productivity of the team will suffer, but we assure you that won’t be the case.", 如果你的员工花时间修复其他人的代码，团队的工作效率可能会受到影响，但我们向您保证，情况并非如此。
+"As mentioned earlier, the productivity of most employees seems to increase when they start working in InnerSource style.", 如前所述，大多数员工在开始使用内源方式工作时，他们的工作效率似乎提高了。
+"You would be their guide in this journey, helping them along the way and also keeping them on-track to maintain a balance among the various responsibilities of the employees, and we are sure you’ll be pleasantly surprised when the process stabilizes and you can actually see an increase in the team productivity and innovation.", 您将成为他们旅程的向导，帮助他们一路走来，并让他们保持员工各种职责之间的平衡，我们相信，当流程稳定下来时，您会惊喜地发现团队生产力和创新的提高。
+"We’d like to start by congratulating you for taking on/considering to take on the responsibility of maintaining one of the first InnerSource projects. The journey will be challenging, but in the longer-term, the benefits would likely be worth the effort.", 首先，我们祝贺您承担/考虑承担维护第一批内源项目的责任。这段旅程将是具有挑战性的，但从长远来看，这些付出都是会有回报的。
+"You have a number of responsibilities in terms of getting the ancillary materials set up, advertising the project to potential contributors, reviewing contributions, and mentoring.", 在设置辅导材料、向潜在贡献者宣传项目、审查贡献和指导方面，您负有许多责任。
+"We strongly suggest you check the “training materials” to better prepare yourself.", 我们强烈建议您检查“培训材料”，以便更好地做好准备。
+"We can promise you that it would be a story worth telling.", 我们可以向你保证，这将是一个值得讲述的故事。
+"As a developer, you are the most valuable player in the InnerSource initiative. It is with your contributions across different projects that the initiative has any hope for success.", 作为开发人员，您是内源 计划中最有价值的参与者。正是通过你在不同的项目中的贡献，该倡议才有成功的希望。
+"But we request you not to view it as simply another management mandated activity – this one is for your own benefit.", 但是，我们要求您不要将其仅视为另一项由管理人员授权的活动-这是为了您自己的利益。
+"This initiative lets you work on projects and features YOU like and YOU care about, and, if you’re up for it, work with other people who like the same things you do.", 通过该计划，您可以从事自己喜欢的项目和功能，并且如果愿意，可以与喜欢您所做的相同事情的其他人一起工作。
+"So, you might be wondering, how do I get started and what do I have to do?", 因此，您可能想知道，我该如何开始以及接下来该怎么办？
+"Well, for starters, we’d encourage you to look at one of the pilot projects and see if you find any of them interesting.", 好吧，对于初学者来说，我们建议您看一个试点项目，看看是否有一个有趣的项目。
+"If you do, please try to see what are the limitations and if you can find any bugs, and do report them.", 如果这样做，请尝试查看有哪些（功能上的）限制，以及是否可以找到任何错误并进行报告。
+"If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs.", 如果您愿意的话，那会很棒，请考虑添加您认为可能有用的功能和/或修复其中一个令人讨厌的错误。
+    

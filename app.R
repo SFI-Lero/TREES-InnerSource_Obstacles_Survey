@@ -53,6 +53,8 @@ showtext_auto()
 translator <- Translator$new(translation_csvs_path = "data")
 
 
+
+
 # Define UI
 ui <- uiOutput('page_content')
 
@@ -78,7 +80,7 @@ server <- function(input, output, session) {
         }
         translator
     })
-
+    
     #save to dropbox
     observeEvent(input$done, {
         tryCatch({
@@ -464,51 +466,44 @@ server <- function(input, output, session) {
 
         )
     )})
-
+    
     # output content
     output$content <- renderUI({
+        state0_line1 = i18n()$t("The InnerSource initiative is of significant importance to the top management who seek to foster a collaborative environment to ensure the long-term sustainability of software projects.")
+        state0_line2 = i18n()$t("InnerSource seeks to apply the recipes of success from the Open-Source paradigm within a company and is heavily practiced by top companies around the world, e.g., Microsoft, Baidu, Tencent, SAP, Broadcom, and many more.")
+        state0_line3 = i18n()$t("In a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/adoption.html#effect-of-innersource-adoption-on-self'>recent survey</a>, 81% of the participants reported an increase in job satisfaction and 57% reported an increase in productivity in their own daily work after adopting the InnerSource style of working.")
+        state0_html = paste("<h4>", state0_line1, "<br>", state0_line2, "<br>", state0_line3, "<hr></h4>")
+        
+        state1_line1 = i18n()$t("As a member of the management, your support for the InnerSource initiative would be hugely appreciated. 85% of the participants in a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/success.html#attitude-of-the-management-towards-innersource-projects'>recent survey</a>,  confirmed that support from the management is critical for the success of the initiative.")
+        state1_line2 = i18n()$t("We humbly request your understanding that although the initiative might face a few hiccups in the beginning, the long-term success will outweigh any short-term disruptions. Research suggests that management support in the initial tentative InnerSource phase is critical to long-term success.")
+        state1_line3 = i18n()$t("It might seem that if your employees are spending time fixing other people’s code the productivity of the team will suffer, but we assure you that won’t be the case.")
+        state1_line4 = i18n()$t("As mentioned earlier, the productivity of most employees seems to increase when they start working in InnerSource style.")
+        state1_line5 = i18n()$t("You would be their guide in this journey, helping them along the way and also keeping them on-track to maintain a balance among the various responsibilities of the employees, and we are sure you’ll be pleasantly surprised when the process stabilizes and you can actually see an increase in the team productivity and innovation.")
+        state1_html = paste("<h4>", state1_line1, "<br>", state1_line2, "<br>", state1_line3, " ", state1_line4, " ", state1_line5, "<hr></h4>")
+        
+        state2_line1 = i18n()$t("We’d like to start by congratulating you for taking on/considering to take on the responsibility of maintaining one of the first InnerSource projects. The journey will be challenging, but in the longer-term, the benefits would likely be worth the effort.")
+        state2_line2 = i18n()$t("You have a number of responsibilities in terms of getting the ancillary materials set up, advertising the project to potential contributors, reviewing contributions, and mentoring.")
+        state2_line3 = i18n()$t("We strongly suggest you check the “training materials” to better prepare yourself.")
+        state2_line4 = i18n()$t("We can promise you that it would be a story worth telling.")
+        state2_html = paste("<h4>", state2_line1, "<br>", state2_line2, "<br>", state2_line3, "<br>", state2_line4, "<hr></h4>")
+        
+        state3_line1 = i18n()$t("As a developer, you are the most valuable player in the InnerSource initiative. It is with your contributions across different projects that the initiative has any hope for success.")
+        state3_line2 = i18n()$t("But we request you not to view it as simply another management mandated activity – this one is for your own benefit.")
+        state3_line3 = i18n()$t("This initiative lets you work on projects and features YOU like and YOU care about, and, if you’re up for it, work with other people who like the same things you do.")
+        state3_line4 = i18n()$t("So, you might be wondering, how do I get started and what do I have to do?")
+        state3_line5 = i18n()$t("Well, for starters, we’d encourage you to look at one of the pilot projects and see if you find any of them interesting.")
+        state3_line6 = i18n()$t("If you do, please try to see what are the limitations and if you can find any bugs, and do report them.")
+        state3_line7 = i18n()$t("If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs.")
+        state3_html = paste("<h4>", state3_line1, "<br>", state3_line2, "<br>", state3_line3, "<br>", state3_line4, "<br><br>", state3_line5, "<br>", state3_line6, "<br>", state3_line7, "<hr></h4>")
+            
         if (state() == 0){
-            HTML("<h4>
-                 The InnerSource initiative is of significant importance to
-                 the top management who seek
-                 to foster a collaborative environment to ensure the long-term
-                 sustainability of software projects.
-                 <br></br>
-                 InnerSource seeks to apply the recipes of success from the Open-Source
-                 paradigm within a company and is heavily practiced by top companies
-                 around the world, e.g., Microsoft, Baidu, Tencent, SAP, Broadcom, and
-                 many more.
-                 <br></br>
-                 In a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/adoption.html#effect-of-innersource-adoption-on-self'>recent survey</a>,
-                 81% of the participants reported an increase in job satisfaction and 57%
-                 reported an increase in productivity in their own daily work after
-                 adopting the InnerSource style of working. <hr>
-                 </h4>"
-            )} else if (state() == 1){
-            HTML("<h4>As a member of the management, your support for the InnerSource initiative would be hugely appreciated. 85% of the participants in a <a href='https://tapjdey.github.io/InnerSource_Survey_2020/success.html#attitude-of-the-management-towards-innersource-projects'>recent survey</a>,  confirmed that support from the management is critical for the success of the initiative.
-<br></br>
-We humbly request your understanding that although the initiative might face a few hiccups in the beginning, the long-term success will outweigh any short-term disruptions. Research suggests that management support in the initial tentative InnerSource phase is critical to long-term success.
-<br></br>
-It might seem that if your employees are spending time fixing other people’s code the productivity of the team will suffer, but we assure you that won’t be the case.
-As mentioned earlier, the productivity of most employees seems to increase when they start working in InnerSource style.
-You would be their guide in this journey, helping them along the way and also keeping them on-track to maintain a balance among the various responsibilities of the employees, and we are sure you’ll be pleasantly surprised when the process stabilizes and you can actually see an increase in the team productivity and innovation. <hr>  </h4>")
-            } else if (state() == 2){
-            HTML("<h4>We’d like to start by congratulating you for taking on/considering to take on the responsibility of maintaining one of the first InnerSource projects.
-The journey will be challenging, but in the longer-term, the benefits would likely be worth the effort. <br>
-You have a number of responsibilities in terms of getting the ancillary materials set up, advertising the project to potential contributors, reviewing contributions, and mentoring.
-We strongly suggest you check the “training materials” to better prepare yourself. <br>
-We can promise you that it would be a story worth telling. <hr></h4>")
-            } else if (state() == 3){
-            HTML("<h4>As a developer, you are the most valuable player in the InnerSource initiative.
-It is with your contributions across different projects that the initiative has any hope for success.<br>
-But we request you not to view it as simply another management mandated activity – this one is for your own benefit. <br>
-This initiative lets you work on projects and features YOU like and YOU care about, and, if you’re up for it, work with other people who like the same things you do.
-<br></br>
-So, you might be wondering, how do I get started and what do I have to do?
-<br></br>
-Well, for starters, we’d encourage you to look at one of the pilot projects and see if you find any of them interesting.<br>
-If you do, please try to see what are the limitations and if you can find any bugs, and do report them.<br>
-If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs. <hr> </h4>")
+            HTML(state0_html)
+        } else if (state() == 1){
+            HTML(state1_html)
+        } else if (state() == 2){
+            HTML(state2_html)
+        } else if (state() == 3){
+            HTML(state3_html)
         }
     })
 
