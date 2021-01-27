@@ -64,13 +64,22 @@ server <- function(input, output, session) {
     state = reactiveVal(0)
     # state update - have to add cn translation
     observeEvent(input$go, {
+        tryCatch({
         if (input$choice == i18n()$t("Part of management")){
             state(1)
         } else if (input$choice == i18n()$t("Owner/Maintainer of one of the pilot projects/ potential pilot projects")){
             state(2)
         } else if (input$choice == i18n()$t("Developer, not in any of the above roles")){
             state(3)
-        }
+        } }, error=function(cond) {
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("ERROR!"),
+                text = i18n()$t("Select an option!"),
+                type = "error"
+            )
+            state(0)
+        })
     })
 
     i18n <- reactive({
@@ -140,7 +149,7 @@ server <- function(input, output, session) {
             sendSweetAlert(
                 session = session,
                 title = i18n()$t("ERROR!"),
-                text = i18n()$t("Dropbox Authentication is not properly set up"),
+                text = i18n()$t("Something went wrong"),
                 type = "error"
             )
         })

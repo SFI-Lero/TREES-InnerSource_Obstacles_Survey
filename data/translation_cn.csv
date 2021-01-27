@@ -1,6 +1,7 @@
 en,中文
 Change language, 选择语言
 ERROR, 错误
+ERROR!, 错误!
 Dropbox Authentication is not properly set up, Dropbox的认证信息设置不正确
 Thank you,谢谢
 Submit,提交
@@ -62,3 +63,5 @@ Save to SQLite DB, 存储到SQLite DB
 "If you do, please try to see what are the limitations and if you can find any bugs, and do report them.", 如果这样做，请尝试查看有哪些（功能上的）限制，以及是否可以找到任何错误并进行报告。
 "If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs.", 如果您愿意的话，那会很棒，请考虑添加您认为可能有用的功能和/或修复其中一个令人讨厌的错误。
 "Please enter your name and email",请输入您的姓名和电子邮件
+"Select an option!",选择一个选项！
+"Something went wrong",出了些问题
