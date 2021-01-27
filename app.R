@@ -85,13 +85,13 @@ server <- function(input, output, session) {
     observeEvent(input$done, {
         tryCatch({
             if (state() == 1){
-                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Manager',ID=input$name, v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
             } else if (state() == 2){
-                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
             } else if (state() == 3){
-                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
             }
             write.table(df, file = fname, row.names = F, sep = ',')
@@ -118,13 +118,13 @@ server <- function(input, output, session) {
     observeEvent(input$local, {
         tryCatch({
             if (state() == 1){
-                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
             } else if (state() == 2){
-                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
             } else if (state() == 3){
-                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
             }
             write.table(df, file = fname, row.names = F, sep = ',')
@@ -155,14 +155,14 @@ server <- function(input, output, session) {
         },
         content = function(file) {
             if (state() == 1){
-                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
                 write.table(df, file = file,  row.names = F, sep = ',')
             } else if (state() == 2){
-                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
                 write.table(df, file = file,  row.names = F, sep = ',')
 
             } else if (state() == 3){
-                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
                 write.table(df, file = file,  row.names = F, sep = ',')
             }
         }
@@ -173,13 +173,13 @@ server <- function(input, output, session) {
         tryCatch({
             if (state() == 1){
                  table <- "responses_Manager" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Manager',v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
             } else if (state() == 2){
                 table <- "responses_Owner" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Owner',v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
             } else if (state() == 3){
                 table <- "responses_Developer" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Developer',v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
                 }
             #state(4)
             # Connect to the database
@@ -230,6 +230,9 @@ server <- function(input, output, session) {
             column(12,htmlOutput('content')),
             br(),
         # questions - Initial text
+        if (state() == 0){
+            column(12, textInput("name", width = '100%', label = h4(i18n()$t("Please enter your name and email")), value = ""),)
+        },
         if (state() == 0){
             column(12, radioButtons("choice", width = '100%',
                          label = h4(i18n()$t("* Initially, we are starting a number of pilot projects to fine-tune the InnerSource process. To inform you better about how you can be a part of this exciting and important initiative, we first ask you to identify your role:")),
