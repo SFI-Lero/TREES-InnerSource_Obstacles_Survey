@@ -62,9 +62,18 @@ ui <- uiOutput('page_content')
 server <- function(input, output, session) {
     # state variable initialization
     state = reactiveVal(0)
+    
     # state update - have to add cn translation
     observeEvent(input$go, {
-        tryCatch({
+        # Check if name email is there
+        if (input$name == ''){
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("ERROR!"),
+                text = i18n()$t("Please enter your name and email*"),
+                type = "error"
+            )
+        } else { tryCatch({
         if (input$choice == i18n()$t("Part of management")){
             state(1)
         } else if (input$choice == i18n()$t("Owner/Maintainer of one of the pilot projects/ potential pilot projects")){
@@ -79,7 +88,7 @@ server <- function(input, output, session) {
                 type = "error"
             )
             state(0)
-        })
+        })}
     })
 
     i18n <- reactive({
@@ -111,7 +120,7 @@ server <- function(input, output, session) {
                 text = i18n()$t("The File has been saved in Dropbox"),
                 type = "success"
             )
-        #state(4)
+        state(4)
         }, error=function(cond) {
             sendSweetAlert(
                 session = session,
@@ -123,103 +132,103 @@ server <- function(input, output, session) {
 
     })
 
-    #save to local storage
-    observeEvent(input$local, {
-        tryCatch({
-            if (state() == 1){
-                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
-                fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
-            } else if (state() == 2){
-                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
-                fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
-            } else if (state() == 3){
-                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
-                fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
-            }
-            write.table(df, file = fname, row.names = F, sep = ',')
+    # #save to local storage
+    # observeEvent(input$local, {
+    #     tryCatch({
+    #         if (state() == 1){
+    #             df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+    #             fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
+    #         } else if (state() == 2){
+    #             df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+    #             fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
+    #         } else if (state() == 3){
+    #             df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+    #             fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
+    #         }
+    #         write.table(df, file = fname, row.names = F, sep = ',')
+    # 
+    #         sendSweetAlert(
+    #             session = session,
+    #             title = i18n()$t("Thank you!"),
+    #             text = i18n()$t("The File has been saved"),
+    #             type = "success"
+    #         )
+    #         #state(4)
+    #     }, error=function(cond) {
+    #         sendSweetAlert(
+    #             session = session,
+    #             title = i18n()$t("ERROR!"),
+    #             text = i18n()$t("Something went wrong"),
+    #             type = "error"
+    #         )
+    #     })
+    # 
+    # })
 
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("Thank you!"),
-                text = i18n()$t("The File has been saved"),
-                type = "success"
-            )
-            #state(4)
-        }, error=function(cond) {
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("ERROR!"),
-                text = i18n()$t("Something went wrong"),
-                type = "error"
-            )
-        })
 
-    })
+    # # Download data
+    # output$saveData = downloadHandler(
+    #     filename = function() {
+    #         sprintf('data_%s.csv',as.integer(Sys.time()))
+    #     },
+    #     content = function(file) {
+    #         if (state() == 1){
+    #             df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+    #             write.table(df, file = file,  row.names = F, sep = ',')
+    #         } else if (state() == 2){
+    #             df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+    #             write.table(df, file = file,  row.names = F, sep = ',')
+    # 
+    #         } else if (state() == 3){
+    #             df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+    #             write.table(df, file = file,  row.names = F, sep = ',')
+    #         }
+    #     }
+    # )
 
-
-    # Download data
-    output$saveData = downloadHandler(
-        filename = function() {
-            sprintf('data_%s.csv',as.integer(Sys.time()))
-        },
-        content = function(file) {
-            if (state() == 1){
-                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
-                write.table(df, file = file,  row.names = F, sep = ',')
-            } else if (state() == 2){
-                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
-                write.table(df, file = file,  row.names = F, sep = ',')
-
-            } else if (state() == 3){
-                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
-                write.table(df, file = file,  row.names = F, sep = ',')
-            }
-        }
-    )
-
-    # save to SQLite database
-    observeEvent(input$sql, {
-        tryCatch({
-            if (state() == 1){
-                 table <- "responses_Manager" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
-            } else if (state() == 2){
-                table <- "responses_Owner" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
-            } else if (state() == 3){
-                table <- "responses_Developer" #--- NEED TO BE CREATED FIRST
-                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
-                }
-            #state(4)
-            # Connect to the database
-            db <- dbConnect(SQLite(), sqlitePath)
-            # Construct the update query by looping over the data fields
-            query <- sprintf(
-                "INSERT INTO %s (%s) VALUES ('%s')",
-                table,
-                paste(names(df), collapse = ", "),
-                paste(df, collapse = "', '")
-            )
-            # Submit the update query and disconnect
-            dbGetQuery(db, query)
-            dbDisconnect(db)
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("Thank you!"),
-                text = i18n()$t("The File has been saved in SQLIite DB"),
-                type = "success"
-            )
-        },
-        error=function(cond) {
-            sendSweetAlert(
-                session = session,
-                title = i18n()$t("ERROR!"),
-                text = i18n()$t("SQLite is not properly set up"),
-                type = "error"
-            )
-        })
-
-    })
+    ## save to SQLite database
+    # observeEvent(input$sql, {
+    #     tryCatch({
+    #         if (state() == 1){
+    #              table <- "responses_Manager" #--- NEED TO BE CREATED FIRST
+    #             df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+    #         } else if (state() == 2){
+    #             table <- "responses_Owner" #--- NEED TO BE CREATED FIRST
+    #             df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+    #         } else if (state() == 3){
+    #             table <- "responses_Developer" #--- NEED TO BE CREATED FIRST
+    #             df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+    #             }
+    #         #state(4)
+    #         # Connect to the database
+    #         db <- dbConnect(SQLite(), sqlitePath)
+    #         # Construct the update query by looping over the data fields
+    #         query <- sprintf(
+    #             "INSERT INTO %s (%s) VALUES ('%s')",
+    #             table,
+    #             paste(names(df), collapse = ", "),
+    #             paste(df, collapse = "', '")
+    #         )
+    #         # Submit the update query and disconnect
+    #         dbGetQuery(db, query)
+    #         dbDisconnect(db)
+    #         sendSweetAlert(
+    #             session = session,
+    #             title = i18n()$t("Thank you!"),
+    #             text = i18n()$t("The File has been saved in SQLIite DB"),
+    #             type = "success"
+    #         )
+    #     },
+    #     error=function(cond) {
+    #         sendSweetAlert(
+    #             session = session,
+    #             title = i18n()$t("ERROR!"),
+    #             text = i18n()$t("SQLite is not properly set up"),
+    #             type = "error"
+    #         )
+    #     })
+    # 
+    # })
     # UI
     output$page_content <- renderUI({
         fluidPage(
@@ -227,7 +236,7 @@ server <- function(input, output, session) {
             selectInput('selected_language',
                         i18n()$t("Change language"),
                         choices = translator$get_languages(),
-                        selected = input$selected_language),
+                        selected = '中文'),
         ),
         # Application title
         title = i18n()$t("InnerSource Obstacles Survey"),
@@ -240,7 +249,7 @@ server <- function(input, output, session) {
             br(),
         # questions - Initial text
         if (state() == 0){
-            column(12, textInput("name", width = '100%', label = h4(i18n()$t("Please enter your name and email")), value = ""),)
+            column(12, textInput("name", width = '100%', label = h4(i18n()$t("Please enter your name and email*")), value = ""),)
         },
         if (state() == 0){
             column(12, radioButtons("choice", width = '100%',
@@ -454,25 +463,25 @@ server <- function(input, output, session) {
        },
        br(),
        if (state() == 1 | state() == 2 | state() == 3){
-           column(2, offset=2, actionBttn("done",label = i18n()$t("Save to Dropbox"),
+           column(4, offset=2, actionBttn("done",label = i18n()$t("Save to Dropbox"),
                                           style = "pill", color = "success",
                                           icon = icon('save')))
        },
-       if (state() == 1 | state() == 2 | state() == 3){
-           column(3, offset=0, actionBttn("local",label = i18n()$t("Save to Local Storage"),
-                                          style = "pill", color = "danger",
-                                          icon = icon('save')))
-       },
-       if (state() == 1 | state() == 2 | state() == 3){
-           column(2, offset = 0, downloadBttn("saveData",
-                                              label = i18n()$t("Download Data"),
-                                              style = "jelly", color = "royal"))
-       },
-       if (state() == 1 | state() == 2 | state() == 3){
-           column(3, offset=0, actionBttn("sql",label = i18n()$t("Save to SQLite DB"),
-                                          style = "pill", color = "primary",
-                                          icon = icon('save')))
-       },
+       # if (state() == 1 | state() == 2 | state() == 3){
+       #     column(3, offset=0, actionBttn("local",label = i18n()$t("Save to Local Storage"),
+       #                                    style = "pill", color = "danger",
+       #                                    icon = icon('save')))
+       # },
+       # if (state() == 1 | state() == 2 | state() == 3){
+       #     column(2, offset = 0, downloadBttn("saveData",
+       #                                        label = i18n()$t("Download Data"),
+       #                                        style = "jelly", color = "royal"))
+       # },
+       # if (state() == 1 | state() == 2 | state() == 3){
+       #     column(3, offset=0, actionBttn("sql",label = i18n()$t("Save to SQLite DB"),
+       #                                    style = "pill", color = "primary",
+       #                                    icon = icon('save')))
+       # },
        br(),
 
 
