@@ -52,8 +52,8 @@ showtext_auto()
 
 translator <- Translator$new(translation_csvs_path = "data")
 
-
-
+# setup the order of language with hard coding
+languages <- c ("中文","en")
 
 # Define UI
 ui <- uiOutput('page_content')
@@ -236,8 +236,8 @@ server <- function(input, output, session) {
                 div(style = "float: right;",
                     selectInput('selected_language',
                                 i18n()$t("Change language"),
-                                choices = translator$get_languages(),
-                                selected = '中文'),
+                                choices = languages,
+                                selected = input$selected_language),
                 ),
             
         
@@ -264,7 +264,7 @@ server <- function(input, output, session) {
        } else if (state() == 1 | state() == 2 | state() == 3){
            column(12, h4(i18n()$t("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' ")))
        } else {
-           column(12, h3(i18n()$t("Thank You! Your response has been recorded")))
+           column(12, h3(i18n()$t("Thank You! Your response has been recorded.")))
        },
        br(),
        if (state() == 0){
