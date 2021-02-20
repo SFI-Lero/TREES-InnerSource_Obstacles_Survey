@@ -17,27 +17,47 @@ Owner/Maintainer of one of the pilot projects/ potential pilot projects, 试点�
 Thank You! Your response has been recorded., 谢谢！您所提交的信息已保存。
 CONCERN: I do not know what InnerSource is, CONCERN: 我不知道内源是什么
 CONCERN: I am not sure about the “benefits” of InnerSource, CONCERN: 我不确定内源能带来什么样的好处
+"Not sure about the benefits of InnerSource",我不确定内源能带来什么样的好处
 CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
+"Lack of resource to allow cross-contribution",我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 CONCERN: Contributions from other teams won’t be of sufficient quality, CONCERN: 来自其它团队的贡献质量不高
+"Unsure about Quality of outsider contributions",来自其它团队的贡献质量不高
 CONCERN: Not knowing the person(s) responsible for a bug might slow responses to customers, CONCERN: 不认识负责处理Bug的人员可能会减慢对客户的响应
+"Customer Service Impact from not knowing buggy code creator",不认识负责处理Bug的人员可能会减慢对客户的响应
 CONCERN: Potential change in the management structure would disrupt the established workflow, CONCERN: 潜在管理结构的变化将破坏已建立的工作流程
-CONCERN: There might not be a budget allocated for InnerSource, CONCERN: 可能没有为InnerSource分配预算
+"Potential change in Management structure disrupting workflow",潜在管理结构的变化将破坏已建立的工作流程
+CONCERN: There might not be a budget allocated for InnerSource, CONCERN: 可能没有为内源分配预算
+"Budget Allocation for InnerSource",内源的预算分配
 CONCERN: Contributions by others would not be of sufficient quality, CONCERN: 他人的贡献质量不高
 "CONCERN: People would create issues, but won’t submit any patches, and I’ll have to maintain it", CONCERN: 大家会提交问题，但不会提交任何补丁，而我必须维护它
+"Lack of Patchers",大家会提交问题，但不会提交任何补丁，而我必须维护它
 CONCERN: I’m unsure about the responsibilities, CONCERN: 我不确定内源的责任
+"Unsure about the Responsibilities",我不确定内源的责任
 CONCERN: I won’t have enough time for mentoring other contributors, CONCERN: 我没有足够的时间来指导其他贡献者
+"Lack of time for Mentoring",我没有足够的时间来指导其他贡献者
 "CONCERN: If I publish code as InnerSource, others will take the code and the credit", CONCERN: 如果我以内源方式发布代码，则其他人将会窃取这些代码并且占有我的工作
+"Code 'Stolen' without proper credit",如果我以内源方式发布代码，则其他人将会窃取这些代码并且占有我的工作
 CONCERN: I would not be happy to publish my code as InnerSource for others to review, CONCERN: 我不愿意将代码以内源方式发布供其他人查看
+"Don't want to publish code for InnerSource",我不愿意将代码以内源方式发布供其他人查看
 CONCERN: I do not know how to contribute to InnerSource, CONCERN: 我不知道如何向内源做贡献
+"Don't know how to contribute to InnerSource",我不知道如何向内源做贡献
 CONCERN: I am not sure what is suitable for InnerSource, CONCERN: 我不确定什么(项目)适合内源（方式开发）
+"Don't know what's appropriate for InnerSource",我不确定什么(项目)适合内源（方式开发）
 CONCERN: My immediate line manager would not be supportive of my contributions to InnerSource, CONCERN: 我的直属经理不会支持我对内源项目的贡献
+"Lack of support from Line Manager",我的直属经理不会支持我对内源项目的贡献
 "CONCERN: There is too much to learn – new tools, new coding standards, etc.", CONCERN: 有太多东西要学习–新工具，新编码标准等
+"Steep Learning Curve",有太多东西要学习–新工具，新编码标准等
 CONCERN: Not knowing who consumes a shared system or code can make it difficult to add features without risking breaking a consumer, CONCERN: 不知道谁在使用共享系统或代码，这可能很难保证添加功能时不会影响用户的使用
+"Breaking Changes affecting unknown consumers",重大变化可能会影响未知的消费者
 CONCERN: The incentives for all this hard work are not appropriate, CONCERN: 对这些辛勤工作使用了不恰当的激励
+"Incentives aren't appropriate",对这些辛勤工作使用了不恰当的激励
 CONCERN: No appropriate incentive for me to contribute to InnerSource, CONCERN: 没有适当的动机激励我为内源项目贡献力量
 CONCERN: I do not have time to contribute to InnerSource, CONCERN: 我没有时间为内源项目贡献力量
+"Don't have time to contribute to InnerSource",我没有时间为内源项目贡献力量
 CONCERN: The projects are not interesting to me, CONCERN: 这些项目对我来说并不有趣
+"Project are uninteresting",这些项目对我来说并不有趣
 CONCERN: I feel that I’ll be judged by others if I make any mistakes, CONCERN: 我觉得如果我有任何错误我会被别人评价
+"Being judged for mistakes",我觉得如果我有任何错误我会被别人评价
 "If you feel that you have concern(s) that is (are) not listed here, please feel free to write that down with the score you think it should have", 如果您认为自己的担忧的问题不在此处列出，请写下您认为的问题并附上相应的分数
 "In addition, if you could think of ONE reason that would make you give InnerSource a try, what would that be?", 另外，如果您想到一个可以让您尝试内源的原因，那会是什么？
 Save to Dropbox, 保存至Dropbox
@@ -67,3 +87,11 @@ Save to SQLite DB, 存储到SQLite DB
 "Select an option!",选择一个选项！
 "Something went wrong",出了些问题
 The File has been saved in Dropbox,文件已保存在Dropbox中
+"Results of InnerSource Obstacles Survey", 内源障碍调查结果
+"Obstacles noted by the Managers",经理们指出的障碍
+"From Survey Questions",来自调查问题
+"Other Obstacles",其他障碍
+"One positive thing about InnerSource",关于内部来源的一件积极的事情
+"Obstacles noted by the Repository Owners",存储库所有者指出的障碍
+"Obstacles noted by the Developers",开发商指出的障碍
+"Don't know what InnerSource is",我不知道内源是什么

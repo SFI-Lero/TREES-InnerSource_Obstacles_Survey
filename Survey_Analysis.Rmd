@@ -1,0 +1,251 @@
+---
+title: "InnerSource Obstacles"
+output:
+  word_document: default
+  pdf_document:
+    latex_engine: xelatex
+    fig_crop: no
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+library(plyr)
+library(likert)
+library(shiny.i18n)
+library(stringr)
+require(showtext)
+
+showtext_auto()
+
+i18n <- Translator$new(translation_csvs_path = "./data")
+i18n$set_translation_language("中文")
+
+process.lik = function(x){
+  return(factor(x, levels = c('0','1','2','3','4','5','6','7','8','9','10')))
+}
+
+f.dev = ldply(list.files(path = 'result/survey', pattern = 'Developer', full.names = T), read.csv, header=T)
+f.man = ldply(list.files(path = 'result/survey', pattern = 'Manager', full.names = T), read.csv, header=T)
+f.own = ldply(list.files(path = 'result/survey', pattern = 'Owner', full.names = T), read.csv, header=T)
+```
+
+<!-- ```latex -->
+<!-- \usepackage{ctex} -->
+<!-- ``` -->
+
+# `r  i18n$t("Results of InnerSource Obstacles Survey")`
+
+## `r i18n$t("Obstacles noted by the Managers")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+what = i18n$t("Don't know what InnerSource is")
+benefit = i18n$t("Not sure about the benefits of InnerSource")
+resource = i18n$t("Lack of resource to allow cross-contribution")
+quality = i18n$t("Unsure about Quality of outsider contributions")
+responsible = i18n$t("Customer Service Impact from not knowing buggy code creator")
+man_struct = i18n$t("Potential change in Management structure disrupting workflow")
+budget = i18n$t("Budget Allocation for InnerSource")
+
+colnames(f.man) = c('type', 'name', what, benefit, resource, quality, responsible, man_struct, budget, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.man[,3:9], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend(""))+ ggtitle(paste0('N=',nrow(f.man)))
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.man$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.man$`One positive thing`), collapse = "\n")))
+
+```
+
+## `r i18n$t("Obstacles noted by the Repository Owners")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+patcher = i18n$t("Lack of Patchers")
+responsibility = i18n$t("Unsure about the Responsibilities")
+mentor = i18n$t("Lack of time for Mentoring")
+steal = i18n$t("Code 'Stolen' without proper credit")
+publish = i18n$t("Don't want to publish code for InnerSource")
+good = i18n$t("Don't know what's appropriate for InnerSource")
+manager = i18n$t("Lack of support from Line Manager")
+learn = i18n$t("Steep Learning Curve")
+breaking = i18n$t("Breaking Changes affecting unknown consumers")
+incentive = i18n$t("Incentives aren't appropriate")
+  
+colnames(f.own) = c('type', 'name', quality, patcher, responsibility, mentor, steal, publish, good, manager, learn, breaking, incentive, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.own[,3:13], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend(""))+ ggtitle(paste0('N=',nrow(f.own)))
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.own$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.own$`One positive thing`), collapse = "\n")))
+
+```
+
+## `r i18n$t("Obstacles noted by the Developers")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+howc = i18n$t("Don't know how to contribute to InnerSource")
+timel = i18n$t("Don't have time to contribute to InnerSource")
+project = i18n$t("Project are uninteresting")
+judge = i18n$t("Being judged for mistakes")
+
+colnames(f.dev) = c('type', 'name', what, howc, manager, incentive, timel, learn, project, judge, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.dev[,3:10], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend(""))+ ggtitle(paste0('N=',nrow(f.dev)))
+
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.dev$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.dev$`One positive thing`), collapse = "\n")))
+
+```
+
+<!-- ############################## -->
+```{r include=FALSE}
+i18n$set_translation_language("en")
+```
+
+
+# `r  i18n$t("Results of InnerSource Obstacles Survey")`
+
+## `r i18n$t("Obstacles noted by the Managers")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+what = i18n$t("Don't know what InnerSource is")
+benefit = i18n$t("Not sure about the benefits of InnerSource")
+resource = i18n$t("Lack of resource to allow cross-contribution")
+quality = i18n$t("Unsure about Quality of outsider contributions")
+responsible = i18n$t("Customer Service Impact from not knowing buggy code creator")
+man_struct = i18n$t("Potential change in Management structure disrupting workflow")
+budget = i18n$t("Budget Allocation for InnerSource")
+
+colnames(f.man) = c('type', 'name', what, benefit, resource, quality, responsible, man_struct, budget, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.man[,3:9], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend("")) + ggtitle(paste0('N=',nrow(f.man)))
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.man$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.man$`One positive thing`), collapse = "\n")))
+
+```
+
+## `r i18n$t("Obstacles noted by the Repository Owners")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+patcher = i18n$t("Lack of people submitting patches (lack of community)")
+responsibility = i18n$t("Unsure about the Responsibilities")
+mentor = i18n$t("Lack of time for Mentoring")
+steal = i18n$t("Code 'Stolen' without proper credit")
+publish = i18n$t("Don't want to publish code for InnerSource")
+good = i18n$t("Don't know what's appropriate for InnerSource")
+manager = i18n$t("Lack of support from Line Manager")
+learn = i18n$t("Steep Learning Curve")
+breaking = i18n$t("Breaking Changes affecting unknown consumers")
+incentive = i18n$t("Incentives aren't appropriate")
+  
+colnames(f.own) = c('type', 'name', quality, patcher, responsibility, mentor, steal, publish, good, manager, learn, breaking, incentive, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.own[,3:13], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend(""))+ ggtitle(paste0('N=',nrow(f.own)))
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.own$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.own$`One positive thing`), collapse = "\n")))
+
+```
+
+## `r i18n$t("Obstacles noted by the Developers")`
+
+### `r i18n$t("From Survey Questions")`
+
+```{r echo=FALSE, fig.show="hold", out.width="90%", fig.align="center", fig.width=12, fig.height=7}
+howc = i18n$t("Don't know how to contribute to InnerSource")
+timel = i18n$t("Don't have time to contribute to InnerSource")
+project = i18n$t("Project are uninteresting")
+judge = i18n$t("Being judged for mistakes")
+
+colnames(f.dev) = c('type', 'name', what, howc, manager, incentive, timel, learn, project, judge, 'Other', 'One positive thing')
+lv = data.frame(lapply(f.dev[,3:10], process.lik))
+lk = likert(lv)
+plot(lk, centered=T, plot.percents =T, text.size=4, wrap=30, plot.percent.neutral=F, plot.percent.low=T, plot.percent.high=T) + theme(text = element_text(size=17)) + guides(fill=guide_legend("")) + ggtitle(paste0('N=',nrow(f.dev)))
+
+
+```
+
+### `r i18n$t("Other Obstacles")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.dev$Other), collapse = "\n")))
+
+```
+
+### `r i18n$t("One positive thing about InnerSource")`
+
+```{r, echo=FALSE, results="asis"}
+cat(str_to_sentence(paste("* ",na.omit(f.dev$`One positive thing`), collapse = "\n")))
+
+```
