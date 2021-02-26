@@ -21,7 +21,7 @@ CONCERN: I am not sure about the “benefits” of InnerSource, CONCERN: 我不�
 CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 "Lack of resource to allow cross-contribution",我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 CONCERN: Contributions from other teams won’t be of sufficient quality, CONCERN: 来自其它团队的贡献质量不高
-"Unsure about Quality of outsider contributions", 其他人贡献质量不稳定。
+"Unsure about Quality of outsider contributions", 不确信外部贡献者的代码质量水平。
 CONCERN: Not knowing the person(s) responsible for a bug might slow responses to customers, CONCERN: 不认识负责处理Bug的人员可能会减慢对客户的响应
 "Customer Service Impact from not knowing buggy code creator",不认识负责处理Bug的人员可能会减慢对客户的响应
 CONCERN: Potential change in the management structure would disrupt the established workflow, CONCERN: 潜在管理结构的变化将破坏已建立的工作流程
