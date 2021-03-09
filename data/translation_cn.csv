@@ -6,12 +6,12 @@ Dropbox Authentication is not properly set up, Dropbox的认证信息设置不�
 Thank you,谢谢
 Thank you!,谢谢!
 Submit,提交
-The File has been saved, 文件已经被保存
+The File has been saved, 文件已保存
 SQLite is not properly set up, SQLite设置不正确
 InnerSource Obstacles Survey, 内源障碍调查
 "* Initially, we are starting a number of pilot projects to fine-tune the InnerSource process. To inform you better about how you can be a part of this exciting and important initiative, we first ask you to identify your role:", 我们将启动许多试点项目来对我们的内源流程进行磨合。 为了让您更好地了解自己如何参与这项激动人心的重要计划，我们首先请您确定您的角色：
 Part of management, 管理成员
-Owner/Maintainer of one of the pilot projects/ potential pilot projects, 试点或者潜在的试点项目的责任人或者维护人员
+Owner/Maintainer of one of the pilot projects/ potential pilot projects, 正在试点的项目或者潜在的试点项目的责任人或者管理人员
 "Developer, not in any of the above roles", 开发者，不属于上面的角色
 "We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' ", 我们想进一步了解您可能遇到的任何问题，以便我们解决并统计这些问题。 下面列出了一些常见的问题。 对于以下问题（以CONCERN：开头），请从您个人的角度以0到10的等级来评估该特定选项对采用内源的担忧程度，其中0：“一点都不担忧”，10： “十分担忧”
 Thank You! Your response has been recorded., 谢谢！您所提交的信息已保存。
@@ -23,7 +23,7 @@ CONCERN: I am not sure about the “benefits” of InnerSource, CONCERN: 我不�
 CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 "Lack of resource to allow cross-contribution",我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 CONCERN: Contributions from other teams won’t be of sufficient quality, CONCERN: 来自其它团队的贡献质量不高
-"Unsure about Quality of outsider contributions",来自其它团队的贡献质量不高
+"Unsure about Quality of outsider contributions", 不确信外部贡献者的代码质量水平。
 CONCERN: Not knowing the person(s) responsible for a bug might slow responses to customers, CONCERN: 不认识负责处理Bug的人员可能会减慢对客户的响应
 "Customer Service Impact from not knowing buggy code creator",不认识负责处理Bug的人员可能会减慢对客户的响应
 CONCERN: Potential change in the management structure would disrupt the established workflow, CONCERN: 潜在管理结构的变化将破坏已建立的工作流程
