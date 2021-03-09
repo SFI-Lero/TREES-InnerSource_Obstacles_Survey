@@ -62,7 +62,7 @@ ui <- uiOutput('page_content')
 server <- function(input, output, session) {
     # state variable initialization
     state = reactiveVal(0)
-    
+    prevstate = reactiveVal(0)
     # state update - have to add cn translation
     observeEvent(input$go, {
         # Check if name email is there
@@ -137,7 +137,7 @@ server <- function(input, output, session) {
     observeEvent(input$local, {
         tryCatch({
             if (state() == 1){
-                df = data.frame(type='Manager',ID=input$name,v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                df = data.frame(type='Manager',ID=input$name, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
                 fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
             } else if (state() == 2){
                 df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
@@ -154,6 +154,7 @@ server <- function(input, output, session) {
                 text = i18n()$t("The File has been saved"),
                 type = "success"
             )
+            prevstate(state())
             state(4)
         }, error=function(cond) {
             sendSweetAlert(
@@ -263,10 +264,11 @@ server <- function(input, output, session) {
                          selected = 1))
        } else if (state() == 1 | state() == 2 | state() == 3){
            column(12, h4(i18n()$t("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' ")))
-       } else {
-           column(12, h3(i18n()$t("Thank You! Your response has been recorded.")))
        },
+       
        br(),
+       
+       
        if (state() == 0){
            column(2, offset=1, actionBttn("go",label = i18n()$t("Submit"),
                                            style = "pill", color = "danger"))
@@ -275,14 +277,14 @@ server <- function(input, output, session) {
            column(8, offset = 1, sliderTextInput(
                inputId = "M1", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not know what InnerSource is"))
+               label = h4(i18n()$t("CONCERN: Timeline pressures and feature content commitments might not allow Developers to contribute to InnerSource projects"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M2", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I am not sure about the “benefits” of InnerSource"))
+               label = h4(i18n()$t("CONCERN: I do not know what InnerSource is/ I am not sure about the “benefits” of InnerSource"))
            ))
        },
        if (state() == 1){
@@ -359,7 +361,7 @@ server <- function(input, output, session) {
            column(8, offset = 1, sliderTextInput(
                inputId = "O6", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I would not be happy to publish my code as InnerSource for others to review"))
+               label = h4(i18n()$t("CONCERN: I do not know how to attract other developers to my project"))
            ))
        },
        if (state() == 2){
@@ -519,7 +521,90 @@ server <- function(input, output, session) {
         state3_line6 = i18n()$t("If you do, please try to see what are the limitations and if you can find any bugs, and do report them.")
         state3_line7 = i18n()$t("If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs.")
         state3_html = paste("<h4>", state3_line1, "<br>", state3_line2, "<br>", state3_line3, "<br>", state3_line4, "<br><br>", state3_line5, "<br>", state3_line6, "<br>", state3_line7, "<hr></h4>")
-            
+        
+        state4_line1 = i18n()$t("Thank You! Your response has been recorded.")
+        state4_line2 = i18n()$t("Based on your answers we have a few suggestions that you might find useful, mostly in terms of existing patterns which were proposed by field experts:<br>")
+        
+        state4_html = paste("<h2>", state4_line1, '</h2><br><br><h3>')
+        # Managers' Feedback
+        state4_line_IN = i18n()$t("InnerSource refers to the application of successful Open Source development practices within the bounds of a company. For concerns regarding InnerSource principles and benefits, please check out  <a href='https://innersourcecommons.org/getting-started/'> this link for getting started</a>.")
+        state4_line_R = i18n()$t("For concerns regarding resource allocation, we suggest starting the initiative as an experiment to figure out what works for your company. You might find the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/start-as-experiment.md'>start-as-experiment</a> pattern useful.")
+        state4_line_Q = i18n()$t("For concerns regarding quality of contributions from outsiders, you might consider implementing the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/30-day-warranty.md'>30-day Warranty</a> pattern or the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/service-vs-library.md'>service-vs-library</a> pattern.")
+        state4_line_TM = i18n()$t("For concerns regarding InnerSource activity interfering with time and feature commitments, we don't have a proven solution, but setting up a <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/gig-marketplace.md'> gig-marketplace </a> and the ideas proposed in the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/overcoming-project-management-time-pressures.md'>overcoming-project-management-time-pressures</a> pattern might be useful.")
+        state4_line_MS = i18n()$t("For concerns regarding potential change in management structure disrupting the workflow, one possible solution could be setting  up a <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/review-committee.md'>review committee</a>.")
+        
+        # Code Owners' Feedback
+        state4_line_TC = i18n()$t("For concerns about having to handle all the work yourself and/or having to mentor every new participant, we strongly suggest assigning a <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/trusted-committer.md'>Trusted Committer</a> for your project.")
+        state4_line_LI = i18n()$t("For concerns regarding other people using your code without proper attribution, we suggest using an <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/innersource-license.md'>InnerSource license</a>. This prepares the ground for handling any improper code reuse in future.")
+        state4_line_SU = i18n()$t("For concerns about what might be suitable for InnerSource and how to attract other developers, we have a few suggestions: For attracting others, setting up a <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/gig-marketplace.md'>gig-marketplace</a> or an <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/innersource-portal.md'>InnerSource portal</a> might be useful. <br> You can check the suitability of your project by checking the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/good-first-project.md'>good-first-project</a> pattern, and the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/crossteam-project-valuation.md'>cross-team project valuation</a> pattern gives insights on measuring a project's value across different teams.")
+        state4_line_LP = i18n()$t("InnerSource is more about changing the development mindset and less about individual tools. You can check out the InnerSource <a href='https://innersourcecommons.org/resources/learningpath/'>Learning Path</a> to get started.")
+        state4_line_IDK = i18n()$t("We are working on designing the appropriate incentives and dealing with problems of dependent projects. In the meantime, some the ideas listed in <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/developer-incentive-alignment-for-innersource-contribution.md'>this pattern</a> might be useful.")
+        state4_line_LM = i18n()$t("With regards to concerns about getting support from your line manager, working on InnerSource projects on a contract basis, as suggested by the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/contracted-contributor.md'>contracted-contributor</a> pattern, might be useful.")
+        state4_line_PI = i18n()$t("If you are not sure which project to contribute to or fear being judged by others, we suggest you look at a project you think would be useful to you and try to integrate the project/parts of the project in your workflow and follow the project discussions. It is a common practice in Open Source that a user gradually becomes more involved with a project (see <a href='https://speaking.sasharosenbaum.com/zIYMi4/survival-of-the-most-open-microsofts-open-source-journey#sN7WpHK'>this slide</a> for reference).")
+        
+        
+        if (prevstate() == 1){
+            state4_html = paste(state4_html,  state4_line2,'<br><ul>')
+            if (input$M2 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_IN, '</li><br>')
+            }
+            if (input$M3 > 4 || input$M7 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_R, '</li><br>')
+            }
+            if (input$M4 > 4 || input$M5 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_Q, '</li><br>')
+            }
+            if (input$M6 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_MS, '</li><br>')
+            }
+            if (input$M1 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_TM, '</li><br>')
+            }
+        } else if (prevstate() == 2){
+            state4_html = paste(state4_html,  state4_line2,'<br><ul>')
+            if (input$O1 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_Q, '</li><br>')
+            }
+            if (input$O2 > 4 || input$O4 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_TC, '</li><br>')
+            }
+            if (input$O3 > 4 || input$O6 > 4 || input$O7 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_SU, '</li><br>')
+            }
+            if (input$O5 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_LI, '</li><br>')
+            }
+            if (input$O8 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_LM, '</li><br>')
+            }
+            if (input$O9 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_LP, '</li><br>')
+            }
+            if (input$O10 > 4 || input$O11 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_IDK, '</li><br>')
+            }
+        } else if (prevstate() == 3){
+            state4_html = paste(state4_html,  state4_line2,'<br><ul>')
+            if (input$D1 > 4 || input$D2 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_IN, '</li><br>')
+            }
+            if (input$D3 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_LM, '</li><br>')
+            }
+            if (input$D4 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_IDK, '</li><br>')
+            }
+            if (input$D5 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_TM, '</li><br>')
+            }
+            if (input$D6 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_LP, '</li><br>')
+            }
+            if (input$D7 > 4 || input$D8 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_PI, '</li><br>')
+            }
+        }
+            state4_html = paste(state4_html, '</ul><hr></h3>')
         if (state() == 0){
             HTML(state0_html)
         } else if (state() == 1){
@@ -528,6 +613,8 @@ server <- function(input, output, session) {
             HTML(state2_html)
         } else if (state() == 3){
             HTML(state3_html)
+        } else if (state() == 4){
+            HTML(state4_html)
         }
     })
 

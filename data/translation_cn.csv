@@ -17,6 +17,8 @@ Owner/Maintainer of one of the pilot projects/ potential pilot projects, 试点�
 Thank You! Your response has been recorded., 谢谢！您所提交的信息已保存。
 CONCERN: I do not know what InnerSource is, CONCERN: 我不知道内源是什么
 CONCERN: I am not sure about the “benefits” of InnerSource, CONCERN: 我不确定内源能带来什么样的好处
+"CONCERN: I do not know what InnerSource is/ I am not sure about the “benefits” of InnerSource",CONCERN: 我不知道内源是什么/我不确定内源能带来什么样的好处
+"Don't know what InnerSource is/Not sure about the benefits of InnerSource",我不知道内源是什么/我不确定内源能带来什么样的好处
 "Not sure about the benefits of InnerSource",我不确定内源能带来什么样的好处
 CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams, CONCERN: 我们没有足够的资源来让开发人员为其他团队的项目做出贡献
 "Lack of resource to allow cross-contribution",我们没有足够的资源来让开发人员为其他团队的项目做出贡献
@@ -95,3 +97,4 @@ The File has been saved in Dropbox,文件已保存在Dropbox中
 "Obstacles noted by the Repository Owners",存储库所有者指出的障碍
 "Obstacles noted by the Developers",开发商指出的障碍
 "Don't know what InnerSource is",我不知道内源是什么
+"CONCERN: I do not know how to attract other developers to my project",CONCERN:我不知道如何吸引其他开发人员加入我的项目
