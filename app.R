@@ -538,8 +538,9 @@ server <- function(input, output, session) {
         state4_line_LI = i18n()$t("For concerns regarding other people using your code without proper attribution, we suggest using an <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/innersource-license.md'>InnerSource license</a>. This prepares the ground for handling any improper code reuse in future.")
         state4_line_SU = i18n()$t("For concerns about what might be suitable for InnerSource and how to attract other developers, we have a few suggestions: For attracting others, setting up a <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/gig-marketplace.md'>gig-marketplace</a> or an <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/innersource-portal.md'>InnerSource portal</a> might be useful. <br> You can check the suitability of your project by checking the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/good-first-project.md'>good-first-project</a> pattern, and the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/crossteam-project-valuation.md'>cross-team project valuation</a> pattern gives insights on measuring a project's value across different teams.")
         state4_line_LP = i18n()$t("InnerSource is more about changing the development mindset and less about individual tools. You can check out the InnerSource <a href='https://innersourcecommons.org/resources/learningpath/'>Learning Path</a> to get started.")
-        state4_line_IDK = i18n()$t("We are working on designing the appropriate incentives and dealing with problems of dependent projects. In the meantime, some the ideas listed in <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/developer-incentive-alignment-for-innersource-contribution.md'>this pattern</a> might be useful.")
+        state4_line_IDK = i18n()$t("We are working on designing the appropriate incentives. In the meantime, some the ideas listed in <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/1-initial/developer-incentive-alignment-for-innersource-contribution.md'>this pattern</a> might be useful.")
         state4_line_LM = i18n()$t("With regards to concerns about getting support from your line manager, working on InnerSource projects on a contract basis, as suggested by the <a href='https://github.com/InnerSourceCommons/InnerSourcePatterns/blob/master/patterns/2-structured/contracted-contributor.md'>contracted-contributor</a> pattern, might be useful.")
+        state4_line_SV = i18n()$t("For problems regarding making breaking changes or adding new features, we suggest you to use semantic versioning.")
         state4_line_PI = i18n()$t("If you are not sure which project to contribute to or fear being judged by others, we suggest you look at a project you think would be useful to you and try to integrate the project/parts of the project in your workflow and follow the project discussions. It is a common practice in Open Source that a user gradually becomes more involved with a project (see <a href='https://speaking.sasharosenbaum.com/zIYMi4/survival-of-the-most-open-microsofts-open-source-journey#sN7WpHK'>this slide</a> for reference).")
         
         
@@ -580,7 +581,10 @@ server <- function(input, output, session) {
             if (input$O9 > 4){
                 state4_html = paste(state4_html, '<li>', state4_line_LP, '</li><br>')
             }
-            if (input$O10 > 4 || input$O11 > 4){
+            if (input$O10 > 4){
+                state4_html = paste(state4_html, '<li>', state4_line_SV, '</li><br>')
+            }
+            if (input$O11 > 4){
                 state4_html = paste(state4_html, '<li>', state4_line_IDK, '</li><br>')
             }
         } else if (prevstate() == 3){
