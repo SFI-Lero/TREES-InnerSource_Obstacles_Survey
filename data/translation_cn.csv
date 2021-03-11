@@ -76,7 +76,7 @@ Save to SQLite DB, 存储到SQLite DB
 "You would be their guide in this journey, helping them along the way and also keeping them on-track to maintain a balance among the various responsibilities of the employees, and we are sure you’ll be pleasantly surprised when the process stabilizes and you can actually see an increase in the team productivity and innovation.", 您将成为他们旅程的向导，帮助他们一路走来，并让他们保持员工各种职责之间的平衡，我们相信，当流程稳定下来时，您会惊喜地发现团队生产力和创新的提高。
 "We’d like to start by congratulating you for taking on/considering to take on the responsibility of maintaining one of the first InnerSource projects. The journey will be challenging, but in the longer-term, the benefits would likely be worth the effort.", 首先，我们祝贺您承担/考虑承担维护第一批内源项目的责任。这段旅程将是具有挑战性的，但从长远来看，这些付出都是会有回报的。
 "You have a number of responsibilities in terms of getting the ancillary materials set up, advertising the project to potential contributors, reviewing contributions, and mentoring.", 在设置辅导材料、向潜在贡献者宣传项目、审查贡献和指导方面，您负有许多责任。
-"We strongly suggest you check the “training materials” to better prepare yourself.", 我们强烈建议您检查“培训材料”，以便更好地做好准备。
+"We strongly suggest you check the “training materials” to better prepare yourself.", 我们强烈建议您阅读“培训材料”，以便更好地做好准备。
 "We can promise you that it would be a story worth telling.", 我们可以向你保证，这将是一个值得讲述的故事。
 "As a developer, you are the most valuable player in the InnerSource initiative. It is with your contributions across different projects that the initiative has any hope for success.", 作为开发人员，您是内源 计划中最有价值的参与者。正是通过你在不同的项目中的贡献，该倡议才有成功的希望。
 "But we request you not to view it as simply another management mandated activity – this one is for your own benefit.", 但是，我们要求您不要将其仅视为另一项由管理人员授权的活动-这是为了您自己的利益。
@@ -85,16 +85,16 @@ Save to SQLite DB, 存储到SQLite DB
 "Well, for starters, we’d encourage you to look at one of the pilot projects and see if you find any of them interesting.", 好吧，对于初学者来说，我们建议您看一个试点项目，看看是否有一个有趣的项目。
 "If you do, please try to see what are the limitations and if you can find any bugs, and do report them.", 如果这样做，请尝试查看有哪些（功能上的）限制，以及是否可以找到任何错误并进行报告。
 "If you are so inclined, and it’d be great if you are, please consider adding a feature that you think might be useful and/or fix one of the annoying bugs.", 如果您愿意的话，那会很棒，请考虑添加您认为可能有用的功能和/或修复其中一个令人讨厌的错误。
-"Please enter your name and email*",请输入您的姓名和电子邮件*
-"Select an option!",选择一个选项！
-"Something went wrong",出了些问题
-The File has been saved in Dropbox,文件已保存在Dropbox中
+"Please enter your name and email*", 请输入您的姓名和电子邮件*
+"Select an option!", 选择一个选项！
+"Something went wrong", 出问题了！
+The File has been saved in Dropbox, 文件已保存在Dropbox中
 "Results of InnerSource Obstacles Survey", 内源障碍调查结果
-"Obstacles noted by the Managers",经理们指出的障碍
-"From Survey Questions",来自调查问题
-"Other Obstacles",其他障碍
-"One positive thing about InnerSource",关于内部来源的一件积极的事情
-"Obstacles noted by the Repository Owners",存储库所有者指出的障碍
-"Obstacles noted by the Developers",开发商指出的障碍
-"Don't know what InnerSource is",我不知道内源是什么
+"Obstacles noted by the Managers", 经理们识别出来的障碍
+"From Survey Questions", 来自调查问题
+"Other Obstacles", 其他障碍
+"One positive thing about InnerSource", 内源能带来的一件积极的事情
+"Obstacles noted by the Repository Owners", 代码维护人员识别出来的障碍
+"Obstacles noted by the Developers", 开发者识别出来的障碍
+"Don't know what InnerSource is", 我不知道内源是什么
 "CONCERN: I do not know how to attract other developers to my project",CONCERN:我不知道如何吸引其他开发人员加入我的项目
