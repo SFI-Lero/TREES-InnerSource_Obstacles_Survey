@@ -101,37 +101,38 @@ server <- function(input, output, session) {
     })
     
     # #save to dropbox
-    # observeEvent(input$done, {
-    #     tryCatch({
-    #         if (state() == 1){
-    #             df = data.frame(type='Manager',ID=input$name, v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
-    #             fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
-    #         } else if (state() == 2){
-    #             df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
-    #             fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
-    #         } else if (state() == 3){
-    #             df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
-    #             fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
-    #         }
-    #         write.table(df, file = fname, row.names = F, sep = ',')
-    #         drop_upload(fname, path = 'Public/HS_data')
-    #         sendSweetAlert(
-    #             session = session,
-    #             title = i18n()$t("Thank you!"),
-    #             text = i18n()$t("The File has been saved in Dropbox"),
-    #             type = "success"
-    #         )
-    #     state(4)
-    #     }, error=function(cond) {
-    #         sendSweetAlert(
-    #             session = session,
-    #             title = i18n()$t("ERROR!"),
-    #             text = i18n()$t("Dropbox Authentication is not properly set up"),
-    #             type = "error"
-    #         )
-    #     })
-    # 
-    # })
+    observeEvent(input$done, {
+        tryCatch({
+            if (state() == 1){
+                df = data.frame(type='Manager',ID=input$name, v1=input$M1, v2=input$M2, v3=input$M3, v4=input$M4, v5=input$M5, v6=input$M6, v7=input$M7, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Manager_%s.csv',as.integer(Sys.time()))
+            } else if (state() == 2){
+                df = data.frame(type='Owner',ID=input$name,v1=input$O1, v2=input$O2, v3=input$O3, v4=input$O4, v5=input$O5, v6=input$O6, v7=input$O7, v8=input$O8, v9=input$O9, v10=input$O10, v11=input$O11, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Owner_%s.csv',as.integer(Sys.time()))
+            } else if (state() == 3){
+                df = data.frame(type='Developer',ID=input$name,v1=input$D1, v2=input$D2, v3=input$D3, v4=input$D4, v5=input$D5, v6=input$D6, v7=input$D7, v8=input$D8, other=input$otherConcern, positive = input$positive)
+                fname = sprintf('Developer_%s.csv',as.integer(Sys.time()))
+            }
+            write.table(df, file = fname, row.names = F, sep = ',')
+            drop_upload(fname, path = 'Public/HS_data')
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("The File has been saved in Dropbox"),
+                type = "success"
+            )
+        prevstate(state())
+        state(4)
+        }, error=function(cond) {
+            sendSweetAlert(
+                session = session,
+                title = i18n()$t("ERROR!"),
+                text = i18n()$t("Dropbox Authentication is not properly set up"),
+                type = "error"
+            )
+        })
+
+    })
 
     #save to local storage
     observeEvent(input$local, {
