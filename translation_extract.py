@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''
 Run as ./translation_extract.py <input file path>
-Output: A text file - translation_text.txt - with text inside the i18n$t() function - requiring translation.
+Output: A text file - translation_text.txt - with text inside the i18n()$t() function for app.R - requiring translation.
 '''
 import re, sys
 
