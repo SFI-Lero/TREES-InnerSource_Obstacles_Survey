@@ -264,7 +264,7 @@ server <- function(input, output, session) {
                                         i18n()$t("Developer, not in any of the above roles")),
                          selected = 1))
        } else if (state() == 1 | state() == 2 | state() == 3){
-           column(12, h4(i18n()$t("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions (starting with CONCERN: ), please rate how big of a concern that particular option is for InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all a concern', 10: 'Major concern' ")))
+           column(12, h4(i18n()$t("We would like to know more about any concerns you might have so that we can address and account for them. A few common concerns are listed below. For the following questions, please rate how well a particular option fits with your concerns about InnerSource adoption from your personal perspective on a scale of 0 to 10, where 0: 'Not at all fits', 10: 'perfectly fits' ")))
        },
        
        br(),
@@ -278,154 +278,154 @@ server <- function(input, output, session) {
            column(8, offset = 1, sliderTextInput(
                inputId = "M1", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Timeline pressures and feature content commitments might not allow Developers to contribute to InnerSource projects"))
+               label = h4(i18n()$t("Timeline pressures and feature content commitments might not allow Developers to contribute to InnerSource projects"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M2", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not know what InnerSource is/ I am not sure about the “benefits” of InnerSource"))
+               label = h4(i18n()$t("I do not know what InnerSource is/ I am not sure about the “benefits” of InnerSource"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M3", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: We don’t have enough resources to let the developers contribute to projects from other teams"))
+               label = h4(i18n()$t("We don’t have enough resources to let the developers contribute to projects from other teams"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M4", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Contributions from other teams won’t be of sufficient quality"))
+               label = h4(i18n()$t("Contributions from other teams won’t be of sufficient quality"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M5", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Not knowing the person(s) responsible for a bug might slow responses to customers"))
+               label = h4(i18n()$t("Not knowing the person(s) responsible for a bug might slow responses to customers"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M6", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Potential change in the management structure would disrupt the established workflow"))
+               label = h4(i18n()$t("Potential change in the management structure would disrupt the established workflow"))
            ))
        },
        if (state() == 1){
            column(8, offset = 1, sliderTextInput(
                inputId = "M7", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: There might not be a budget allocated for InnerSource"))
+               label = h4(i18n()$t("There might not be a budget allocated for InnerSource"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O1", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Contributions by others would not be of sufficient quality"))
+               label = h4(i18n()$t("Contributions by others would not be of sufficient quality"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O2", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: People would create issues, but won’t submit any patches, and I’ll have to maintain it"))
+               label = h4(i18n()$t("People would create issues, but won’t submit any patches, and I’ll have to maintain it"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O3", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I’m unsure about the responsibilities"))
+               label = h4(i18n()$t("I’m unsure about the responsibilities"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O4", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I won’t have enough time for mentoring other contributors"))
+               label = h4(i18n()$t("I won’t have enough time for mentoring other contributors"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O5", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: If I publish code as InnerSource, others will take the code and the credit"))
+               label = h4(i18n()$t("If I publish code as InnerSource, others will take the code and the credit"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O6", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not know how to attract other developers to my project"))
+               label = h4(i18n()$t("I do not know how to attract other developers to my project"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O7", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I am not sure what is suitable for InnerSource"))
+               label = h4(i18n()$t("I am not sure what is suitable for InnerSource"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O8", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: My immediate line manager would not be supportive of my contributions to InnerSource"))
+               label = h4(i18n()$t("My immediate line manager would not be supportive of my contributions to InnerSource"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O9", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: There is too much to learn – new tools, new coding standards, etc."))
+               label = h4(i18n()$t("There is too much to learn – new tools, new coding standards, etc."))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O10", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: Not knowing who consumes a shared system or code can make it difficult to add features without risking breaking a consumer"))
+               label = h4(i18n()$t("Not knowing who consumes a shared system or code can make it difficult to add features without risking breaking a consumer"))
            ))
        },
        if (state() == 2){
            column(8, offset = 1, sliderTextInput(
                inputId = "O11", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: The incentives for all this hard work are not appropriate"))
+               label = h4(i18n()$t("The incentives for all this hard work are not appropriate"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D1", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not know what InnerSource is"))
+               label = h4(i18n()$t("I do not know what InnerSource is"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D2", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not know how to contribute to InnerSource"))
+               label = h4(i18n()$t("I do not know how to contribute to InnerSource"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D3", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: My immediate line manager would not be supportive of my contributions to InnerSource"))
+               label = h4(i18n()$t("My immediate line manager would not be supportive of my contributions to InnerSource"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D4", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: No appropriate incentive for me to contribute to InnerSource"))
+               label = h4(i18n()$t("No appropriate incentive for me to contribute to InnerSource"))
            ))
        },
 
@@ -433,28 +433,28 @@ server <- function(input, output, session) {
            column(8, offset = 1, sliderTextInput(
                inputId = "D5", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I do not have time to contribute to InnerSource"))
+               label = h4(i18n()$t("I do not have time to contribute to InnerSource"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D6", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: There is too much to learn – new tools, new coding standards, etc."))
+               label = h4(i18n()$t("There is too much to learn – new tools, new coding standards, etc."))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D7", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: The projects are not interesting to me"))
+               label = h4(i18n()$t("The projects are not interesting to me"))
            ))
        },
        if (state() == 3){
            column(8, offset = 1, sliderTextInput(
                inputId = "D8", width = '100%', choices = seq(from = 0, to = 10, by = 1),
                grid = TRUE, selected = 5, force_edges = TRUE,
-               label = h4(i18n()$t("CONCERN: I feel that I’ll be judged by others if I make any mistakes"))
+               label = h4(i18n()$t("I feel that I’ll be judged by others if I make any mistakes"))
            ))
        },
        if (state() == 1 | state() == 2 | state() == 3){
